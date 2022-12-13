@@ -38,3 +38,4 @@ class Flintlock(Item):
         self.verb = "shoot"
         self.verb2 = "shoots"
 
+

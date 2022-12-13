@@ -7,7 +7,9 @@ __all__ = ["drowned_pirates",
 "seagull",
 "white_zetsu",
 "itachi_uchiha",
-"nagato_uzumaki"]
+"nagato_uzumaki",
+"tobi"]
+
 
 
 

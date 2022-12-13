@@ -13,7 +13,7 @@ class NagatoUzumaki (event.Event):
         result = {}
         result["message"] = " Nagato of the Rinnegan is defeated!"
         monsters = [Nagato("Nagato of the Rinnegan ")]
-        announce ("You are facing Nagato of the Rinnegan!")
+        announce ("The world shall know pain!! You are facing Nagato of the Rinnegan!")
         Combat(monsters).combat()
         result["newevents"] = [ self ]
         return result

@@ -4,6 +4,7 @@ from game.display import announce
 from game.events import *
 
 
+
 class Island (location.Location):
 
     def __init__ (self, x, y, w):
@@ -59,8 +60,8 @@ class Cave_Entrance (location.SubLocation):
     def __init__(self, m):
         super().__init__(m)
         self.name = "Cave Entrance"
-        # self.event_chance = 100
-        # self.events.append(white_zetsu.WhiteZetsu()) #change it to white zetsu army
+        self.event_chance = 100
+        self.events.append(white_zetsu.WhiteZetsu())
 
 
     def enter (self):
@@ -103,7 +104,7 @@ class First_Room (location.SubLocation):
                     config.the_player.next_loc = self.main_location.locations["Second Room"]
                     self.solved = True
                 elif answer == "hint":
-                    print("I can be used by anyone no matter the wpm!")
+                    print("I can be used by anyone no matter the WPM!")
                 elif self.tries >= 2:
                     print("You have gotten it wrong. It was an easy riddle! Time to burn to death!")
                     config.the_player.gameInProgress = False
@@ -116,8 +117,8 @@ class Second_Room(location.SubLocation):
     def __init__(self, m):
         super().__init__(m)
         self.name = "Second Room"
-        # self.event_chance = 100
-        # self.events.append(itachi_uchiha.ItachiUchiha())
+        self.event_chance = 100
+        self.events.append(itachi_uchiha.ItachiUchiha())
 
     def enter(self):
         announce("You made it past the first room! Congratulations, you get to fight to the death against Itachi Uchiha. ")
@@ -128,18 +129,20 @@ class Second_Room(location.SubLocation):
         elif (verb == "north"):
             config.the_player.next_loc = self.main_location.locations["Third Room"]
 
+
 #
 #
 class Third_Room(location.SubLocation):
     def __init__(self, m):
         super().__init__(m)
         self.name = "Third Room"
+        self.event_chance = 100
+        self.events.append(tobi.TobiObito())
+
 
 
     def enter(self):
-        announce(
-            "You have made it to the third room. What's this Konan is challenging you to a rock, paper, scissor match!"
-            " May the best person win!!!!")
+        announce("You have made it to the third room. What's this Tobi is challenging you to a fight!")
 
     def process_verb(self, verb, cmd_list, nouns):
         if (verb == "south"):
@@ -147,18 +150,19 @@ class Third_Room(location.SubLocation):
         elif (verb == "north"):
             config.the_player.next_loc = self.main_location.locations["Fourth Room"]
 
+
+
 #
 #
 class Fourth_Room(location.SubLocation):
     def __init__(self, m):
         super().__init__(m)
         self.name = "Fourth Room"
-        # self.event_chance = 100
-        # self.events.append(nagato_uzumaki.NagatoUzumaki())
+        self.event_chance = 100
+        self.events.append(nagato_uzumaki.NagatoUzumaki())
 
     def enter(self):
-        announce(
-            "You have managed to beat Ho-oh. Welcome to the fourth room where you will be able to ")
+        announce("You have managed to beat Tobi. Nagato of the Rinnegan was waiting for you! You think you have the will to face him. ")
 
     def process_verb(self, verb, cmd_list, nouns):
         if (verb == "south"):
@@ -172,18 +176,25 @@ class Fifth_Room(location.SubLocation):
     def __init__(self, m):
         super().__init__(m)
         self.name = "Fifth Room"
-        self.event_chance = 50
-        self.events.append(man_eating_monkeys.ManEatingMonkeys())
+
 
     def enter(self):
-        announce(
-            "You walk down the stairs to enter the first room of the dungeon. It seems there is a puzzle of some sort. ")
+        announce("You make it to the last room of the dungeon where you thought you would find "
+                 "a legendary sword like Samehada! But you were mistaken you fool!!!")
 
     def process_verb(self, verb, cmd_list, nouns):
         if (verb == "south"):
             config.the_player.next_loc = self.main_location.locations["Fourth Room"]
         if (verb == "north"):
-            config.the_player.next_loc = self.main_location.locations["Fifth Room"]
+            announce("You return to your ship.There was nothing in the dungeon for you to take!\n"
+                     "Next time do not be so curious about a random cave!\n"
+                     "You should listen to your parents because curiosity kills the cat!")
+            config.the_player.next_loc = config.the_player.ship
+            config.the_player.visiting = False
+
+
+
+
 
 
 
